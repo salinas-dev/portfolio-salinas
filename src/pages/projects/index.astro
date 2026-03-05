@@ -1,0 +1,41 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Slide from "../../components/Slide.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import { getCollection } from "astro:content";
+import { site } from "../../data/site";
+
+const projects = await getCollection("projects");
+const sorted = projects.sort((a, b) => (b.data.year ?? 0) - (a.data.year ?? 0));
+---
+<BaseLayout title={`Projects — ${site.name}`} description="Proyectos DevOps: CI/CD, Docker, Terraform, monitoreo.">
+  <div class="grid grid-2" style="margin: 8px 0 18px;">
+    <Slide tone="sage" grid={true}>
+      <div class="kicker">Projects</div>
+      <h1 class="title-serif h1">Proyectos</h1>
+      <p class="p">
+        Implementaciones prácticas: pipelines, IaC, contenedores, monitoreo y seguridad.
+      </p>
+    </Slide>
+
+    <Slide tone="paper" grid={true}>
+      <div class="kicker">Enfoque</div>
+      <h2 class="title-serif h2">DevOps Jr (práctico)</h2>
+      <p class="p">
+        Cada proyecto incluye: objetivo, stack, pasos clave, y resultados medibles.
+      </p>
+    </Slide>
+  </div>
+
+  <div class="grid grid-2" style="margin-bottom: 26px;">
+    {sorted.map((p) => (
+      <ProjectCard
+        title={p.data.title}
+        description={p.data.description}
+        cover={p.data.cover}
+        href={`/projects/${p.slug}`}
+        tag={p.data.year ? String(p.data.year) : "Project"}
+      />
+    ))}
+  </div>
+</BaseLayout>

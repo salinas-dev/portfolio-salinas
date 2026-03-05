@@ -1,0 +1,44 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Slide from "../components/Slide.astro";
+import { site } from "../data/site";
+---
+
+<BaseLayout title={`Contact — ${site.name}`} description="Contacto y enlaces.">
+  <div class="grid grid-2" style="margin: 8px 0 26px;">
+    <Slide tone="sand" grid={true}>
+      <h1 class="title-serif h1">Contact</h1>
+      <p class="p">
+        Si te interesa mi perfil para DevOps Jr, puedes contactarme por email o
+        revisar mis repos.
+      </p>
+      <p class="p" style="margin-top:12px;">
+        <b>Email:</b>
+        {site.email}<br />
+        <b>Tel:</b>
+        {site.phone}<br />
+        <b>Ubicación:</b>
+        {site.location}
+      </p>
+    </Slide>
+
+    <Slide tone="paper" grid={true}>
+      <h2 class="title-serif h2">Links</h2>
+      <div class="row" style="margin-top: 10px;">
+        <a class="btn" href={`mailto:${site.email}`}>Email</a>
+        <a class="btn" href={site.github} target="_blank" rel="noreferrer"
+          >GitHub</a
+        >
+        <a class="btn" href={site.facebook} target="_blank" rel="noreferrer"
+          >Facebook</a
+        ><a class="btn" href={site.instagram} target="_blank" rel="noreferrer"
+          >Instagram</a
+        >
+        <a class="btn" href={site.linkedin} target="_blank" rel="noreferrer"
+          >LinkedIn</a
+        >
+        <a class="btn" href={site.cvUrl} target="_blank" rel="noreferrer">CV</a>
+      </div>
+    </Slide>
+  </div>
+</BaseLayout>

@@ -1,0 +1,70 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Slide from "../components/Slide.astro";
+import { site } from "../data/site";
+import { skills } from "../data/skills";
+import { experience } from "../data/experience";
+---
+
+<BaseLayout
+  title={`About — ${site.name}`}
+  description="Perfil, skills y experiencia DevOps Jr."
+>
+  <div class="grid grid-2" style="margin: 8px 0 18px;">
+    <Slide tone="paper" grid={true}>
+      <h1 class="title-serif h1">About</h1>
+      <p class="p">
+        Ingeniera en Sistemas con experiencia en desarrollo backend y
+        automatización de despliegues. Enfoque: DevOps e Infraestructura como
+        Código.
+      </p>
+      <p class="p" style="margin-top:12px;">
+        Ubicación: <b>{site.location}</b>
+      </p>
+    </Slide>
+
+    <Slide tone="sage" grid={true}>
+      <div class="kicker">Educación</div>
+      <h2 class="title-serif h2">Ing. en Sistemas Computacionales</h2>
+      <p class="p">Tecnológico de Estudios Superiores de Jilotepec</p>
+      <p class="p" style="margin-top:10px;"><b>2020 – 2025</b></p>
+    </Slide>
+  </div>
+
+  <div class="grid grid-2" style="margin-bottom: 18px;">
+    <Slide tone="sand" grid={true}>
+      <div class="kicker">Skills</div>
+      <h2 class="title-serif h2">Principales</h2>
+      <p class="p">{skills.primary.join(" · ")}</p>
+      <div class="kicker" style="margin-top:14px;">Secundarias</div>
+      <p class="p">{skills.secondary.join(" · ")}</p>
+    </Slide>
+
+    <Slide tone="paper" grid={true}>
+      <div class="kicker">Idiomas</div>
+      <h2 class="title-serif h2">Español · Inglés</h2>
+      <p class="p">Nivel: B1</p>
+    </Slide>
+  </div>
+
+  <div class="card slide bg-paper gridlines" style="margin-bottom: 26px;">
+    <h2 class="title-serif h2">Experiencia práctica</h2>
+    <div
+      class="grid"
+      style="grid-template-columns: 1fr; gap: 14px; margin-top: 10px;"
+    >
+      {
+        experience.map((e) => (
+          <div style="padding:14px; border:1px solid rgba(31,35,40,.10); border-radius:14px; background: rgba(255,255,255,.6);">
+            <div class="kicker">{e.title}</div>
+            <ul style="margin:10px 0 0; color: rgba(31,35,40,.75); line-height:1.7;">
+              {e.highlights.map((h) => (
+                <li>{h}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>

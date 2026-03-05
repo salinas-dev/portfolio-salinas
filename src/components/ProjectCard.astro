@@ -1,0 +1,21 @@
+---
+const { title, description, cover, href, tag = "Project" } = Astro.props;
+---
+<a class="card" href={href} style="display:block;">
+  <div class="slide bg-paper gridlines" style="min-height: 230px; display:grid; gap:14px;">
+    <div>
+      <div class="kicker">{tag}</div>
+      <h3 class="title-serif h2" style="margin-top:6px;">{title}</h3>
+      <p class="p">{description}</p>
+    </div>
+
+    {cover && (
+    <img
+      class="img-cover"
+      src={cover}
+      alt={title}
+      loading="lazy"
+    />
+    )}
+  </div>
+</a>

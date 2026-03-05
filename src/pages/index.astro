@@ -1,11 +1,109 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Slide from "../components/Slide.astro";
+import { site } from "../data/site";
+import { skills } from "../data/skills";
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout
+  title={`${site.name} — ${site.role}`}
+  description="Portafolio DevOps Jr: CI/CD, Docker, Terraform, monitoreo y despliegues."
+>
+  <div class="grid grid-2" style="margin: 8px 0 26px;">
+    <Slide tone="sage" grid={true}>
+      <div class="row" style="justify-content:space-between; gap: 10px;">
+        <div class="kicker">{site.name.toUpperCase()}</div>
+        <div class="kicker">{site.role.toUpperCase()}</div>
+        <div class="kicker">{site.phone}</div>
+      </div>
+
+      <div style="margin-top: 54px;">
+        <h1 class="title-serif h1">Portfolio</h1>
+        <p class="p">
+          Ingeniera en Sistemas con experiencia en backend y automatización de
+          despliegues. Enfocada en DevOps e infraestructura como código.
+        </p>
+
+        <div class="row" style="margin-top: 18px;">
+          <a class="btn primary" href="/projects">Ver proyectos</a>
+          <a class="btn" href="/about">Sobre mí</a>
+          <a class="btn" href={site.cvUrl} target="_blank" rel="noreferrer"
+            >Descargar CV</a
+          >
+        </div>
+      </div>
+    </Slide>
+
+    <Slide tone="paper" grid={true}>
+      <div
+        class="grid"
+        style="grid-template-columns: 1.1fr .9fr; gap: 16px; align-items:center;"
+      >
+        <div>
+          <h2 class="title-serif h2">About Me</h2>
+          <p class="p">
+            DevOps Jr con práctica real en CI/CD, Docker, Terraform y monitoreo.
+            Me interesa profesionalizarme en Infraestructura como Código y
+            automatización.
+          </p>
+
+          <div class="row" style="margin-top: 14px;">
+            <a class="btn" href={`mailto:${site.email}`}>Email</a>
+            <a class="btn" href={site.github} target="_blank" rel="noreferrer"
+              >GitHub</a
+            >
+            <a class="btn" href="/contact">Contacto</a>
+          </div>
+        </div>
+
+        <img
+          src="/images/nora.png"
+          alt={`${site.name} foto`}
+          loading="lazy"
+          style="width:100%; height: 180px; object-fit:cover; border-radius: 14px; border:1px solid rgba(31,35,40,.10);"
+        />
+      </div>
+    </Slide>
+  </div>
+
+  <div class="grid grid-2" style="margin-bottom: 18px;">
+    <Slide tone="sand" grid={true} align="center">
+      <div>
+        <div class="kicker">Stack</div>
+        <h2 class="title-serif h2" style="margin:0;">DevOps Core</h2>
+      </div>
+    </Slide>
+
+    <Slide tone="paper" grid={true}>
+      <h2 class="title-serif h2">Skills principales</h2>
+      <p class="p" style="margin-bottom:12px;">
+        {skills.primary.join(" · ")}
+      </p>
+      <div class="kicker">Secundarias</div>
+      <p class="p">{skills.secondary.join(" · ")}</p>
+    </Slide>
+  </div>
+
+  <div class="grid grid-2" style="margin: 0 0 26px;">
+    <Slide tone="sand" grid={true} align="center">
+      <div>
+        <h2 class="title-serif h2" style="margin:0;">Thank you.</h2>
+        <p class="p" style="margin-top:10px;">
+          {site.email} · {site.phone}
+        </p>
+      </div>
+    </Slide>
+
+    <Slide tone="paper" grid={true}>
+      <h2 class="title-serif h2">Disponibilidad</h2>
+      <p class="p">
+        Abierta a roles Jr en DevOps / Cloud / Platform Engineering. Prioridad:
+        automatización, IaC, contenedores y monitoreo.
+      </p>
+      <div class="row" style="margin-top: 14px;">
+        <a class="btn primary" href="/projects">Proyectos</a>
+        <a class="btn" href="/contact">Contacto</a>
+      </div>
+    </Slide>
+  </div>
+</BaseLayout>

@@ -1,0 +1,235 @@
+@import "tailwindcss";
+:root{
+  --bg: #f6f2ea;
+  --paper: #ffffff;
+  --sage: #9eb2a1;
+  --sand: #d7c7ae;
+  --ink: #1f2328;
+  --muted: rgba(31,35,40,.70);
+
+  --radius: 18px;
+  --shadow: 0 12px 30px rgba(0,0,0,.12);
+
+  --serif: ui-serif, "Georgia", "Times New Roman", serif;
+  --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  color:var(--ink);
+  font-family: var(--sans);
+  background: radial-gradient(1200px 700px at 70% 30%, #e8d9ea 0%, transparent 60%),
+              radial-gradient(900px 600px at 20% 70%, #d6e4dd 0%, transparent 55%),
+              var(--bg);
+}
+
+a{ color:inherit; text-decoration:none; }
+a:hover{ text-decoration:underline; }
+
+.container{
+  width:min(1100px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.grid{
+  display:grid;
+  gap: 18px;
+}
+
+.grid-2{
+  grid-template-columns: 1fr;
+}
+@media (min-width: 900px){
+  .grid-2{
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.card{
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow:hidden;
+  background: var(--paper);
+}
+
+.slide{
+  position:relative;
+  min-height: 240px;
+  padding: 28px;
+}
+
+.slide.bg-sage{ background: color-mix(in srgb, var(--sage) 85%, white 15%); }
+.slide.bg-sand{ background: color-mix(in srgb, var(--sand) 85%, white 15%); }
+.slide.bg-paper{ background: var(--paper); }
+
+.gridlines::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:.22;
+  background-image:
+    linear-gradient(to right, rgba(31,35,40,.25) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(31,35,40,.25) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mix-blend-mode: multiply;
+}
+
+.kicker{
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  font-size: .75rem;
+  color: var(--muted);
+}
+
+.title-serif{
+  font-family: var(--serif);
+  font-weight: 500;
+  letter-spacing: .02em;
+}
+
+.h1{
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  margin: 0 0 8px;
+}
+.h2{
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  margin: 0 0 10px;
+}
+.p{
+  color: var(--muted);
+  line-height: 1.65;
+  margin: 0;
+  max-width: 60ch;
+}
+
+.row{
+  display:flex;
+  gap: 14px;
+  align-items:center;
+  flex-wrap: wrap;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(31,35,40,.14);
+  background: rgba(255,255,255,.6);
+  backdrop-filter: blur(6px);
+  font-weight: 600;
+}
+.btn.primary{
+  background: rgba(31,35,40,.92);
+  color: white;
+  border-color: rgba(31,35,40,.92);
+}
+
+.topbar{
+  padding: 18px 0;
+}
+
+.nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap: 12px;
+}
+.nav .brand{
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  letter-spacing: .04em;
+}
+.nav a{
+  opacity:.85;
+}
+.nav a:hover{ opacity:1; }
+
+.footer{
+  padding: 34px 0 60px;
+  color: var(--muted);
+  font-size: .95rem;
+}
+/* =========================
+   IMÁGENES RESPONSIVE
+   ========================= */
+
+/* base: cualquier imagen no debe salirse del contenedor */
+img{
+  max-width: 100%;
+  height: auto;
+}
+
+/* imagen responsive genérica */
+.img-responsive{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+/* para imágenes tipo “cover” (cards/proyectos):
+   recorta sin deformar y mantiene proporción estable */
+/* Imagen responsive para proyectos */
+.img-cover{
+  width:100%;
+  height:auto;
+  aspect-ratio:16/9;
+  object-fit:cover;
+  border-radius:14px;
+  border:1px solid rgba(31,35,40,.10);
+}
+
+/* variante editorial (como tu referencia, más “slide”) */
+.img-cover-43{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid rgba(31,35,40,.10);
+}
+
+/* avatar (navbar/perfil): tamaño fijo para NO romper el navbar */
+.img-avatar{
+  width: 34px;
+  height: 34px;
+  object-fit: cover;
+  border-radius: 50%;
+  flex: 0 0 auto;
+  border: 1px solid rgba(31,35,40,.10);
+}
+
+/* en pantallas grandes crece un poco */
+@media (min-width: 900px){
+  .img-avatar{
+    width: 38px;
+    height: 38px;
+  }
+}
+
+/* navbar: asegura alineación al usar imagen + texto */
+.nav .brand{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  min-width: 0; /* evita overflow raro */
+}
+
+/* si el nombre es largo, que no rompa en móvil */
+.nav .brand span{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 42vw;
+}
+
+@media (min-width: 900px){
+  .nav .brand span{
+    max-width: none;
+  }
+}
