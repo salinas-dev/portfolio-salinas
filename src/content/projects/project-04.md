@@ -1,24 +1,25 @@
 ---
-title: "Arquitectura multi-tenant para Odoo en Docker"
-description: "Múltiples instancias Odoo con DB separada por cliente, reverse proxy y backups programados."
+title: "Travel Social Series"
+description: "Serie de publicaciones para redes sociales enfocadas en contenido turístico y storytelling visual."
 year: 2025
-tags: ["Docker", "Odoo", "Multi-tenant", "PostgreSQL", "Traefik"]
-stack: ["Docker", "Docker Compose", "Odoo", "PostgreSQL", "Traefik/Nginx"]
-cover: "/images/projects/odoo.png"
-repo: "N/A"
-demo: "N/A"
+category: "Social Design"
+cover: "/images/projects/travel-series.jpeg"
+tools: ["Figma", "Social Media Design", "Visual Storytelling"]
+repo: ""
+demo: ""
+figma: "https://www.figma.com/"
 highlights:
-  - "Contenerización de múltiples instancias Odoo."
-  - "Base de datos PostgreSQL separada por cliente."
-  - "Reverse proxy con Traefik o Nginx."
-  - "Backups automáticos programados."
-  - "Estrategia de actualización sin downtime (básico)."
+  - "Diseño de una serie visual para publicaciones de viajes."
+  - "Uso de composición vertical y formas orgánicas para destacar fotografías."
+  - "Integración de numeración y estructura narrativa para contar una historia del viaje."
+  - "Uso de tipografía minimalista para mantener protagonismo en las imágenes."
+  - "Sistema visual adaptable a múltiples destinos o itinerarios."
 ---
-
 ## Qué hice
 
-Diseñé una arquitectura para operar múltiples clientes aislados por instancia.
+Diseñé una serie de publicaciones para redes sociales orientadas a contenido de viajes.  
+El objetivo fue construir una narrativa visual clara donde cada imagen representara una etapa del recorrido, manteniendo una estética limpia y consistente.
 
 ## Resultado
 
-Aislamiento por cliente, operación más ordenada y backups recurrentes.
+Se creó una línea gráfica adaptable para compartir itinerarios de viaje, recomendaciones de destinos y storytelling visual dentro de plataformas como Instagram.

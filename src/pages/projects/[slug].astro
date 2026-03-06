@@ -1,127 +1,116 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import Slide from "../../components/Slide.astro";
-import { getCollection } from "astro:content";
-import { site } from "../../data/site";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
-  return projects.map((p) => ({ params: { slug: p.slug }, props: { p } }));
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
 }
 
-const { p } = Astro.props;
-const { Content } = await p.render();
+const { project } = Astro.props;
+const { Content } = await render(project);
 ---
 
 <BaseLayout
-  title={`${p.data.title} — ${site.name}`}
-  description={p.data.description}
+  title={`${project.data.title} — Portfolio`}
+  description={project.data.description}
 >
-  <div class="grid grid-2" style="margin: 8px 0 18px;">
-    <Slide tone="sand" grid={true}>
-      <div class="kicker">Project</div>
-      <h1 class="title-serif h1">{p.data.title}</h1>
-      <p class="p">{p.data.description}</p>
+  <Navbar />
 
-      {
-        p.data.stack?.length ? (
-          <p class="p" style="margin-top:12px;">
-            <b>Stack:</b> {p.data.stack.join(" · ")}
-          </p>
-        ) : null
-      }
+  <main class="section">
+    <div class="container project-detail project-detail-clean">
+      <div class="project-header">
+        <div class="project-header-top">
+          <p class="eyebrow">{project.data.category}</p>
 
-      <div class="row" style="margin-top: 14px;">
-        {
-          p.data.demo && (
-            <a
-              class="btn primary"
-              href={p.data.demo}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Demo
-            </a>
-          )
-        }
-        {
-          p.data.repo && (
-            <a class="btn" href={p.data.repo} target="_blank" rel="noreferrer">
-              Repo
-            </a>
-          )
-        }
-        <a class="btn" href="/projects">Volver</a>
+          {
+            project.data.figma && (
+              <a
+                href={project.data.figma}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-light project-figma-btn"
+              >
+                Ver Figma
+              </a>
+            )
+          }
+        </div>
+
+        <h1 class="page-title">{project.data.title}</h1>
+        <p class="project-lead">{project.data.description}</p>
       </div>
-    </Slide>
+      <div class="project-actions">
+        {
+          project.data.demo && (
+            <a
+              href={project.data.demo}
+              target="_blank"
+              rel="noopener"
+              class="btn btn-dark"
+            >
+              Ver demo
+            </a>
+          )
+        }
 
-    <Slide tone="paper" grid={true}>
-      {
-        p.data.cover ? (
+        {
+          project.data.repo && (
+            <a
+              href={project.data.repo}
+              target="_blank"
+              rel="noopener"
+              class="btn btn-light"
+            >
+              Ver repositorio
+            </a>
+          )
+        }
+      </div>
+
+      <div class="project-hero-media">
         <img
-          class="img-cover"
-          src={p.data.cover}
-          alt={p.data.title}
-          loading="lazy"
+          src={project.data.cover}
+          alt={project.data.title}
+          class="project-detail-image"
         />
-        ) : (
-          <p class="p">
-            Agrega una imagen en <code>public/images/projects</code> y ponla en
-            el frontmatter.
-          </p>
-        )
-      }
-    </Slide>
-  </div>
+      </div>
 
-  {
-    (p.data.highlights?.length || p.data.tags?.length) && (
-      <div class="grid grid-2" style="margin-bottom: 18px;">
-        <Slide tone="paper" grid={true}>
-          <h2 class="title-serif h2">Highlights</h2>
-          {p.data.highlights?.length ? (
-            <ul style="margin: 10px 0 0; color: rgba(31,35,40,.75); line-height:1.7;">
-              {p.data.highlights.map((h) => (
-                <li>{h}</li>
+      <div class="project-info-grid project-info-grid-clean">
+        <div class="project-info-card">
+          <span>Año</span>
+          <p>{project.data.year}</p>
+        </div>
+
+        <div class="project-info-card">
+          <span>Herramientas</span>
+          <p>{project.data.tools.join(" · ")}</p>
+        </div>
+      </div>
+
+      {
+        project.data.highlights?.length > 0 && (
+          <section class="project-highlights">
+            <span>Highlights</span>
+            <ul>
+              {project.data.highlights.map((item) => (
+                <li>{item}</li>
               ))}
             </ul>
-          ) : (
-            <p class="p">N/A</p>
-          )}
-        </Slide>
+          </section>
+        )
+      }
 
-        <Slide tone="sage" grid={true}>
-          <h2 class="title-serif h2">Tags</h2>
-          <p class="p">
-            {p.data.tags?.length ? p.data.tags.join(" · ") : "N/A"}
-          </p>
-        </Slide>
-      </div>
-    )
-  }
+      <article class="project-content">
+        <Content />
+      </article>
+    </div>
+  </main>
 
-  <div class="card slide bg-paper gridlines" style="margin-bottom: 26px;">
-    <article class="prose">
-      <Content />
-    </article>
-  </div>
-
-  <style>
-    .prose :global(h2) {
-      font-family: var(--serif);
-      font-weight: 500;
-      margin-top: 18px;
-      margin-bottom: 8px;
-    }
-    .prose :global(p),
-    .prose :global(li) {
-      color: rgba(31, 35, 40, 0.75);
-      line-height: 1.75;
-    }
-    .prose :global(code) {
-      background: rgba(31, 35, 40, 0.06);
-      padding: 2px 6px;
-      border-radius: 8px;
-    }
-  </style>
+  <Footer />
 </BaseLayout>

@@ -1,41 +1,75 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import Slide from "../../components/Slide.astro";
-import ProjectCard from "../../components/ProjectCard.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
 import { getCollection } from "astro:content";
 import { site } from "../../data/site";
 
 const projects = await getCollection("projects");
-const sorted = projects.sort((a, b) => (b.data.year ?? 0) - (a.data.year ?? 0));
+const sorted = projects.sort((a, b) => b.data.year - a.data.year);
 ---
-<BaseLayout title={`Projects — ${site.name}`} description="Proyectos DevOps: CI/CD, Docker, Terraform, monitoreo.">
-  <div class="grid grid-2" style="margin: 8px 0 18px;">
-    <Slide tone="sage" grid={true}>
-      <div class="kicker">Projects</div>
-      <h1 class="title-serif h1">Proyectos</h1>
-      <p class="p">
-        Implementaciones prácticas: pipelines, IaC, contenedores, monitoreo y seguridad.
-      </p>
-    </Slide>
 
-    <Slide tone="paper" grid={true}>
-      <div class="kicker">Enfoque</div>
-      <h2 class="title-serif h2">DevOps Jr (práctico)</h2>
-      <p class="p">
-        Cada proyecto incluye: objetivo, stack, pasos clave, y resultados medibles.
-      </p>
-    </Slide>
-  </div>
+<BaseLayout title={`Projects — ${site.name}`} description="Proyectos">
+  <Navbar />
 
-  <div class="grid grid-2" style="margin-bottom: 26px;">
-    {sorted.map((p) => (
-      <ProjectCard
-        title={p.data.title}
-        description={p.data.description}
-        cover={p.data.cover}
-        href={`/projects/${p.slug}`}
-        tag={p.data.year ? String(p.data.year) : "Project"}
-      />
-    ))}
-  </div>
+  <main class="section">
+    <div class="container projects-header">
+      <div>
+        <p class="eyebrow">PROJECTS</p>
+        <h1 class="page-title">Selected Projects</h1>
+      </div>
+      <p class="section-text">
+        Proyectos de diseño web e interfaces con enfoque visual, editorial y
+        funcional.
+      </p>
+    </div>
+
+    <div class="container projects-grid">
+      {
+        sorted.map((project) => (
+          <article class="project-card project-card-clean">
+            <a href={`/projects/${project.slug}`} class="project-card-link">
+              <div class="project-image-wrap project-image-wrap-clean">
+                <img
+                  src={project.data.cover}
+                  alt={project.data.title}
+                  class="project-image"
+                  loading="lazy"
+                />
+              </div>
+
+              <div class="project-meta project-meta-clean">
+                <p class="project-category">{project.data.category}</p>
+                <h3>{project.data.title}</h3>
+                <p>{project.data.description}</p>
+
+                <div class="project-meta-row">
+                  <span class="project-year">{project.data.year}</span>
+
+                  {project.data.tools?.length > 0 && (
+                    <div class="project-tools">
+                      {project.data.tools.slice(0, 3).map((tool) => (
+                        <span>{tool}</span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </a>
+
+            <div class="project-links">
+              <a
+                href={`/projects/${project.slug}`}
+                class="project-link-pill project-link-primary"
+              >
+                Ver proyecto
+              </a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </main>
+
+  <Footer />
 </BaseLayout>

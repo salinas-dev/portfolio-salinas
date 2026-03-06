@@ -1,22 +1,23 @@
 ---
-title: "Monitoreo para microservicios — Prometheus + Grafana"
-description: "Observabilidad con métricas de CPU/memoria, dashboards y alertas básicas."
+title: "Podcast Social Design"
+description: "Sistema visual para promoción de podcast en redes sociales con enfoque editorial y branding audiovisual."
 year: 2025
-tags: ["Monitoring", "Prometheus", "Grafana", "Observability"]
-stack: ["Prometheus", "Grafana", "Linux", "Docker"]
-cover: "/images/projects/monitoring.png"
-repo: "N/A"
-demo: "N/A"
+category: "Social Design"
+cover: "/images/projects/podcast-post.png"
+tools: ["Figma", "Social Media Design", "Branding"]
+figma: "https://www.figma.com/design/VJoZrol5dfGWeRbAy0zDOZ/-podcast-post?node-id=0-1&t=T1mMGltGZCLSUURo-1"
 highlights:
-  - "Integración de Prometheus y Grafana."
-  - "Monitoreo de CPU, memoria y métricas personalizadas."
-  - "Configuración de alertas básicas."
+  - "Diseño de una serie de posts para promoción de episodios de podcast."
+  - "Uso de paleta rojo, beige y negro para identidad visual fuerte."
+  - "Composición modular adaptable a distintos formatos de publicación."
+  - "Integración de elementos visuales inspirados en reproductores de audio."
+  - "Diseño enfocado en claridad visual y jerarquía tipográfica."
 ---
-
 ## Qué hice
 
-Levanté un stack de monitoreo para dar visibilidad a servicios y host.
+Diseñé una colección de piezas visuales para promocionar episodios de podcast en redes sociales.  
+El enfoque principal fue crear una identidad visual consistente que combinara elementos de interfaz de reproductores de audio con una estética editorial moderna.
 
 ## Resultado
 
-Dashboards listos y alertas base para detectar problemas temprano.
+Se obtuvo una línea gráfica adaptable para anuncios de episodios, promociones en vivo y publicaciones informativas dentro de redes sociales, manteniendo coherencia visual entre todas las piezas.

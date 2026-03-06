@@ -1,109 +1,150 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Slide from "../components/Slide.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import { getCollection } from "astro:content";
 import { site } from "../data/site";
-import { skills } from "../data/skills";
+
+const projects = await getCollection("projects");
+const featuredProjects = projects
+  .filter((p) => p.data.featured)
+  .sort((a, b) => b.data.year - a.data.year)
+  .slice(0, 4);
 ---
 
-<BaseLayout
-  title={`${site.name} — ${site.role}`}
-  description="Portafolio DevOps Jr: CI/CD, Docker, Terraform, monitoreo y despliegues."
->
-  <div class="grid grid-2" style="margin: 8px 0 26px;">
-    <Slide tone="sage" grid={true}>
-      <div class="row" style="justify-content:space-between; gap: 10px;">
-        <div class="kicker">{site.name.toUpperCase()}</div>
-        <div class="kicker">{site.role.toUpperCase()}</div>
-        <div class="kicker">{site.phone}</div>
-      </div>
+<BaseLayout title={`${site.name} — Portfolio`} description={site.description}>
+  <Navbar />
 
-      <div style="margin-top: 54px;">
-        <h1 class="title-serif h1">Portfolio</h1>
-        <p class="p">
-          Ingeniera en Sistemas con experiencia en backend y automatización de
-          despliegues. Enfocada en DevOps e infraestructura como código.
-        </p>
-
-        <div class="row" style="margin-top: 18px;">
-          <a class="btn primary" href="/projects">Ver proyectos</a>
-          <a class="btn" href="/about">Sobre mí</a>
-          <a class="btn" href={site.cvUrl} target="_blank" rel="noreferrer"
-            >Descargar CV</a
-          >
-        </div>
-      </div>
-    </Slide>
-
-    <Slide tone="paper" grid={true}>
-      <div
-        class="grid"
-        style="grid-template-columns: 1.1fr .9fr; gap: 16px; align-items:center;"
-      >
-        <div>
-          <h2 class="title-serif h2">About Me</h2>
-          <p class="p">
-            DevOps Jr con práctica real en CI/CD, Docker, Terraform y monitoreo.
-            Me interesa profesionalizarme en Infraestructura como Código y
-            automatización.
+  <main>
+    <section class="hero section">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">WEB DESIGN · UI/UX · FRONTEND</p>
+          <h1>
+            Diseño experiencias web
+            <br />
+            limpias, editoriales
+            <br />
+            y funcionales.
+          </h1>
+          <p class="lead">
+            Portafolio enfocado en diseño web, interfaces UI/UX y desarrollo
+            frontend con estética minimalista y atención al detalle.
           </p>
 
-          <div class="row" style="margin-top: 14px;">
-            <a class="btn" href={`mailto:${site.email}`}>Email</a>
-            <a class="btn" href={site.github} target="_blank" rel="noreferrer"
-              >GitHub</a
+          <div class="hero-actions">
+            <a href="/projects" class="btn btn-dark">Ver proyectos</a>
+            <a href="/about" class="btn btn-light">Sobre mí</a>
+            <a href="/cv.pdf" target="_blank" class="btn btn-light"
+              >Descargar CV</a
             >
-            <a class="btn" href="/contact">Contacto</a>
           </div>
         </div>
 
-        <img
-          src="/images/nora.png"
-          alt={`${site.name} foto`}
-          loading="lazy"
-          style="width:100%; height: 180px; object-fit:cover; border-radius: 14px; border:1px solid rgba(31,35,40,.10);"
-        />
+        <div class="hero-card">
+          <div class="hero-card-inner">
+            <div class="hero-photo-wrap">
+              <img
+                src="/images/nora.jpeg"
+                alt="Foto de Nora Salinas"
+                class="hero-photo"
+              />
+            </div>
+
+            <p class="eyebrow">ABOUT ME</p>
+            <h2>Nora Salinas</h2>
+            <p>
+              Diseñadora y desarrolladora web enfocada en interfaces elegantes,
+              experiencia de usuario y sitios visualmente sólidos.
+            </p>
+
+            <div class="mini-links">
+              <a href={`mailto:${site.email}`}>Email</a>
+              <a href={site.github} target="_blank">GitHub</a>
+              <a href="/contact">Contacto</a>
+            </div>
+          </div>
+        </div>
       </div>
-    </Slide>
-  </div>
+    </section>
 
-  <div class="grid grid-2" style="margin-bottom: 18px;">
-    <Slide tone="sand" grid={true} align="center">
-      <div>
-        <div class="kicker">Stack</div>
-        <h2 class="title-serif h2" style="margin:0;">DevOps Core</h2>
+    <section class="section section-soft">
+      <div class="container split-intro">
+        <div>
+          <p class="eyebrow">SELECTED WORK</p>
+          <h2>Proyectos destacados</h2>
+        </div>
+
+        <div>
+          <p class="section-text">
+            Una selección de proyectos de diseño y desarrollo web centrados en
+            claridad visual, jerarquía tipográfica, composición y experiencia de
+            usuario.
+          </p>
+        </div>
       </div>
-    </Slide>
 
-    <Slide tone="paper" grid={true}>
-      <h2 class="title-serif h2">Skills principales</h2>
-      <p class="p" style="margin-bottom:12px;">
-        {skills.primary.join(" · ")}
-      </p>
-      <div class="kicker">Secundarias</div>
-      <p class="p">{skills.secondary.join(" · ")}</p>
-    </Slide>
-  </div>
+      <div class="container projects-grid">
+        {
+          featuredProjects.map((project) => (
+            <a href={`/projects/${project.slug}`} class="project-card">
+              <div class="project-image-wrap">
+                <img
+                  src={project.data.cover}
+                  alt={project.data.title}
+                  class="project-image"
+                />
+              </div>
 
-  <div class="grid grid-2" style="margin: 0 0 26px;">
-    <Slide tone="sand" grid={true} align="center">
-      <div>
-        <h2 class="title-serif h2" style="margin:0;">Thank you.</h2>
-        <p class="p" style="margin-top:10px;">
-          {site.email} · {site.phone}
+              <div class="project-meta">
+                <p class="project-category">{project.data.category}</p>
+                <h3>{project.data.title}</h3>
+                <p>{project.data.description}</p>
+                <span class="project-year">{project.data.year}</span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container two-column-info">
+        <div class="info-block block-beige">
+          <p class="eyebrow">SERVICES</p>
+          <h2>Diseño web & UI/UX</h2>
+          <p>
+            Diseño de interfaces, landing pages, portfolios, sistemas visuales y
+            experiencias web orientadas a claridad, estética y usabilidad.
+          </p>
+        </div>
+
+        <div class="info-block block-light">
+          <p class="eyebrow">TOOLS</p>
+          <h2>Herramientas</h2>
+          <p>
+            Figma · HTML · CSS · JavaScript · React · Astro · Tailwind · Git
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container cta-panel">
+        <p class="eyebrow">AVAILABLE FOR WORK</p>
+        <h2>Disponible para proyectos web, UI y diseño digital</h2>
+        <p>
+          Abierta a colaborar en portfolios, landing pages, interfaces modernas
+          y sitios con enfoque visual fuerte.
         </p>
-      </div>
-    </Slide>
 
-    <Slide tone="paper" grid={true}>
-      <h2 class="title-serif h2">Disponibilidad</h2>
-      <p class="p">
-        Abierta a roles Jr en DevOps / Cloud / Platform Engineering. Prioridad:
-        automatización, IaC, contenedores y monitoreo.
-      </p>
-      <div class="row" style="margin-top: 14px;">
-        <a class="btn primary" href="/projects">Proyectos</a>
-        <a class="btn" href="/contact">Contacto</a>
+        <div class="hero-actions">
+          <a href="/projects" class="btn btn-dark">Proyectos</a>
+          <a href="/contact" class="btn btn-light">Contacto</a>
+        </div>
       </div>
-    </Slide>
-  </div>
+    </section>
+  </main>
+
+  <Footer />
 </BaseLayout>

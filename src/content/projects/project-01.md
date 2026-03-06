@@ -1,23 +1,20 @@
 ---
-title: "Pipeline DevOps — Flask + React"
-description: "CI/CD con GitHub Actions para build, push de imágenes Docker y despliegue automatizado en VPS."
+title: "Travel Post Design"
+description: "Piezas visuales para redes con enfoque turístico y branding editorial."
 year: 2025
-tags: ["DevOps", "CI/CD", "Docker", "GitHub Actions"]
-stack: ["Flask", "React", "Docker", "Docker Compose", "Linux", "GitHub Actions"]
-cover: "/images/projects/pipeline.png"
-repo: "N/A"
-demo: "N/A"
+category: "UI Design"
+cover: "/images/projects/travel-post.jpeg"
+tools: ["Figma", "Social Design", "Branding"]
+figma: "https://www.figma.com/design/W7cJ5OnRgebHj84hzYq4vw/-travel-post?node-id=0-1&t=PRkM6F3sI28gofGi-1"
 highlights:
-  - "Dockerización de backend (Flask) y frontend (React)."
-  - "Orquestación con Docker Compose."
-  - "Implementación de pipeline CI/CD en GitHub Actions."
-  - "Build automático de imágenes y push a Docker Hub."
-  - "Despliegue automatizado en servidor Linux (VPS)."
-  - "Gestión de variables de entorno y secrets."
+  - "Diseño de piezas para Instagram."
+  - "Jerarquía visual clara y composición editorial."
+  - "Uso de mockups y framing visual."
 ---
-
 ## Qué hice
-Implementé un flujo automatizado desde commit hasta despliegue, con contenedores y variables seguras.
+
+Diseñé una serie de piezas promocionales para redes sociales con enfoque turístico.
 
 ## Resultado
-Despliegues repetibles, menos errores manuales y releases más rápidos.
+
+Una propuesta visual atractiva, clara y adaptable a campañas digitales.

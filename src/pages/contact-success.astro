@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import { site } from "../data/site";
+---
+
+<BaseLayout
+    title={`Mensaje enviado — ${site.name}`}
+    description="Mensaje enviado"
+>
+    <Navbar />
+
+    <main class="section">
+        <div class="container success-wrap">
+            <p class="eyebrow">MESSAGE SENT</p>
+            <h1 class="page-title">Gracias por escribirme</h1>
+            <p class="section-text">
+                Recibí tu mensaje correctamente. Te responderé lo antes posible.
+            </p>
+
+            <div class="hero-actions" style="margin-top: 24px;">
+                <a href="/" class="btn btn-dark">Volver al inicio</a>
+                <a href="/projects" class="btn btn-light">Ver proyectos</a>
+            </div>
+        </div>
+    </main>
+
+    <Footer />
+</BaseLayout>
